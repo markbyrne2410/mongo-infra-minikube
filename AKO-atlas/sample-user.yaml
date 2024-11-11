@@ -1,0 +1,17 @@
+apiVersion: atlas.mongodb.com/v1
+kind: AtlasDatabaseUser
+metadata:
+ name: sample-user
+ namespace: mongodb-atlas-system
+spec:
+ roles:
+   - roleName: "readWriteAnyDatabase"
+     databaseName: "admin"
+ projectRef:
+   name: firstname.lastname
+ username: test-user 
+ passwordSecretRef:
+   name: the-user-password
+ scopes:
+   - type: CLUSTER
+     name: my-ako-replicaset

@@ -23,7 +23,7 @@ fi
 
 ### Prompt for version
 
-version_options=("v2.3.1" "v2.2.2" "v2.0.1" "custom" "Quit")
+version_options=("v2.3.1" "v2.4.0" "v2.5.0" "custom" "Quit")
 select opt in "${version_options[@]}"
 do
   case $opt in
@@ -31,12 +31,12 @@ do
       export AKO_version=v2.3.1
       break
       ;;
-      v2.2.2)
-      export AKO_version=v2.2.2
+      v2.4.0)
+      export AKO_version=v2.4.1
       break
       ;;
-      v2.0.1)
-      export AKO_version=v2.0.1
+      v2.5.0)
+      export AKO_version=v2.5.0
       break
       ;;
       custom)

@@ -12,7 +12,8 @@ powershell quick-start.ps1 # On Windows
   - `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser`
 
 **Note:** This can take some time, maybe 6 or 7 minute (longer if your connection is slow). Wait for the output to show Ops Manager is running (like below). Then hit ctrl+c to get your prompt back. Maybe wait an additional minute or two.
-```
+
+```console
 mongo-infra-minikube  1    7.0.8     Running    Running  Disabled    10m     
 ```
 
@@ -21,7 +22,8 @@ mongo-infra-minikube  1    7.0.8     Running    Running  Disabled    10m
 1. In a 2nd terminal `kubectl port-forward pod/mongo-infra-minikube-0 8080:8080`
 2. Then visit http://localhost:8080 in your browser
 
-**Login to Ops Manager**
+#### Login to Ops Manager
+
 - Username: admin
 - Password: Passw0rd1!
 
