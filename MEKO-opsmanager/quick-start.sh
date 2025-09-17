@@ -45,7 +45,7 @@ done
 
 
 ### Prompt for operator version
-echo "Select a version of the operator"
+echo "Select a version of the MEKO/MCK operator"
 operator_options=("1.26.0" "1.25.0" "1.24.0" "custom" "Quit")
 select opt in "${operator_options[@]}"
 do
@@ -75,6 +75,33 @@ do
       ;;
   esac
 done
+
+# --- Operator Version MEKO/MCK check logic ---
+# --- If a user enters a version between 1.20.0 - 1.33.0, they want MEKO, otherwise assume its a MCK version. ---
+lower="1.20.0"
+upper="1.33.0"
+
+version_between() {
+    local version="$1"
+    local lower="$2"
+    local upper="$3"
+    [[ "$(printf '%s\n' "$lower" "$version" | sort -V | head -n1)" == "$lower" ]] &&
+    [[ "$(printf '%s\n' "$version" "$upper" | sort -V | head -n1)" == "$version" ]]
+}
+
+if version_between "$MEKO_version" "$lower" "$upper"; then
+    export MEKO=true
+else
+    export MEKO=false
+fi
+
+if [ "$MEKO" = true ]; then
+    URL_PATH="mongodb-enterprise-kubernetes"
+else
+    URL_PATH="mongodb-kubernetes"
+fi
+
+# --- Version check logic ---
 
 echo "Which version of Ops Manager would you like to install"
 opsman_options=("7.0.8" "6.0.24" "custom" "Quit")
@@ -121,9 +148,16 @@ then
 else
   echo "Installing the operator into the mongodb namespace"
   kubectl create namespace mongodb
-  kubectl apply -f https://raw.githubusercontent.com/mongodb/mongodb-enterprise-kubernetes/$MEKO_version/crds.yaml
-  kubectl apply -f https://raw.githubusercontent.com/mongodb/mongodb-enterprise-kubernetes/$MEKO_version/mongodb-enterprise.yaml
-  kubectl describe deployments mongodb-enterprise-operator -n $MEKO_namespace
+  if $MEKO == 1
+  then
+    kubectl apply -f https://raw.githubusercontent.com/mongodb/mongodb-enterprise-kubernetes/$MEKO_version/crds.yaml
+    kubectl apply -f https://raw.githubusercontent.com/mongodb/mongodb-enterprise-kubernetes/$MEKO_version/mongodb-enterprise.yaml
+    kubectl describe deployments mongodb-enterprise-operator -n $MEKO_namespace
+  else
+    kubectl apply -f https://raw.githubusercontent.com/mongodb/mongodb-kubernetes/$MEKO_version/public/mongodb-kubernetes.yaml
+    kubectl apply -f https://raw.githubusercontent.com/mongodb/mongodb-kubernetes/$MEKO_version/public/crds.yaml
+    kubectl describe deployments mongodb-kubernetes-operator -n $MEKO_namespace
+  fi
 fi
 
 # Generate our deployment yaml file
