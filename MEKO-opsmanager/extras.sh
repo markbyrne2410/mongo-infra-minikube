@@ -1,5 +1,5 @@
 #!/bin/bash
-MONGO_INFRA_MINIKUBE_IP=`minikube ip -p opsmanager`
+export MONGO_INFRA_MINIKUBE_IP=`minikube ip -p opsmanager`
 export MONGO_INFRA_MINIKUBE
 MONGO_INFRA_MINIKUBE_GLOBAL_API_PUBLIC=`kubectl get secret mongodb-mongo-infra-minikube-admin-key -o jsonpath={.data.publicKey} | base64 --decode`
 export MONGO_INFRA_MINIKUBE_GLOBAL_API_PUBLIC
@@ -66,12 +66,16 @@ data:
 EOF
 
 # Create deployment
-deployment_options=("Deploy-Sample" "Quit")
+deployment_options=("Deploy-Sample" "Deploy-MongoDB-Search-and-Vector-Search" "Quit")
 select opt in "${deployment_options[@]}"
 do
   case $opt in
       Deploy-Sample)
       kubectl apply -f deploy-mdb.yaml
+      break
+      ;;
+      Deploy-MongoDB-Search-and-Vector-Search)
+      ./scripts/search_setup.sh
       break
       ;;
       Quit)

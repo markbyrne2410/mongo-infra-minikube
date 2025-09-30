@@ -1,0 +1,14 @@
+apiVersion: mongodb.com/v1
+kind: MongoDBSearch
+metadata:
+  name: mdb-rs
+spec:
+  # no need to specify source.mongodbResourceRef if MongoDBSearch CR has the same name as MongoDB CR
+  # the operator infer it automatically
+  resourceRequirements:
+    limits:
+      cpu: "1"
+      memory: 2Gi
+    requests:
+      cpu: "1"
+      memory: 1Gi

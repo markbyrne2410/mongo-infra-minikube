@@ -35,6 +35,23 @@ On Linux/Mac:
 On Windows:
 - `powershell extras.ps1`
 
+### 4. Create a MongoDB Search and Vector Search Deployment
+
+On Linux/Mac:
+- `bash extras.sh`
+
+- Optionally, you can confirm to generate test data for the Cluster with a Search and Vector index ceated
+
+- Three users are created each with a password `Passw0rd1`
+    - User `mdb-admin` for administration of the MongoDB
+    - User `mdb-user` which can be used for querying
+    - User `search-sync-source` user used by mongot to connect to MongoDB
+
+- To connect to the MongoDB Cluster there is a pod `mongodb-tools-pod` which contains MongoDB Tools. Connect to the pod using the below command.
+   - kubectl exec -it mongodb-tools-pod -- /bin/bash
+   - The MongoDB Cluster uri is `mongodb://<username>:<password>@mdb-rs-svc.mongodb.svc.cluster.local:27017/?replicaSet=mdb-rs`
+
+
 ## Clean Up
 
 This will remove the kubernetes cluster and with it Ops Manager and your database

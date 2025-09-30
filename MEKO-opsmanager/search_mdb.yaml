@@ -1,0 +1,33 @@
+apiVersion: mongodb.com/v1
+kind: MongoDB
+metadata:
+  name: mdb-rs
+spec:
+  members: 1
+  version: 8.0.10-ent
+  type: ReplicaSet
+  opsManager:
+    configMapRef:
+      name: my-project-search-vector
+  credentials: credentials-project-search-vector
+  security:
+    authentication:
+      enabled: true
+      ignoreUnknownUsers: true
+      modes:
+      - SCRAM
+  agent:
+    logLevel: DEBUG
+  statefulSet:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mongodb-enterprise-database
+            resources:
+              limits:
+                cpu: "2"
+                memory: 3Gi
+              requests:
+                cpu: "1"
+                memory: 1Gi
