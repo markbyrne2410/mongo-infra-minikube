@@ -3,8 +3,8 @@ kind: MongoDB
 metadata:
   name: mdb-rs
 spec:
-  members: 3
-  version: 8.2.3-ent
+  members: 1
+  version: 8.0.10-ent
   type: ReplicaSet
   opsManager:
     configMapRef:
@@ -16,19 +16,6 @@ spec:
       ignoreUnknownUsers: true
       modes:
       - SCRAM
-      requireClientTLSAuthentication: false
-    certsSecretPrefix: "mdb"
-    tls:
-      ca: "my-ca"
-  connectivity:
-    replicaSetHorizons:
-      - "nodeport": "mdb-rs-0.localhost:32017"
-      - "nodeport": "mdb-rs-1.localhost:32018"
-      - "nodeport": "mdb-rs-2.localhost:32019"
-  additionalMongodConfig:
-    net:
-      ssl:
-        mode: "allowSSL"
   agent:
     logLevel: DEBUG
   statefulSet:
