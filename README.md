@@ -5,9 +5,9 @@ Deploy MongoDB software and tools into a local minikube environment
 
 | Feature | Supported | Notes |
 | --- | --- | --- |
-| Atlas Kubernetes Operator | :heavy_check_mark: | `cd atlas-kubernetes-operator` [README.md](/AKO-atlas/README.md) |
-| Enterprise Kubernetes Operator - Ops Manager | :heavy_check_mark: | `cd enterprise-kubernetes-operator` [README.md](/MEKO-opsmanager/README.md) |
-| Enterprise Kubernetes Operator - Cloud Manager | :heavy_check_mark: | `cd enterprise-kubernetes-operator` [README.md](/MEKO-cloudmanager/README.md) |
+| Atlas Kubernetes Operator | :heavy_check_mark: | `cd AKO-atlas` [README.md](/AKO-atlas/README.md) |
+| Enterprise Kubernetes Operator - Ops Manager | :heavy_check_mark: | `cd MEKO-opsmanager` [README.md](/MEKO-opsmanager/README.md) |
+| Enterprise Kubernetes Operator - Cloud Manager | :heavy_check_mark: | `cd MEKO-cloudmanager` [README.md](/MEKO-cloudmanager/README.md) |
 
 
 ## Changelog

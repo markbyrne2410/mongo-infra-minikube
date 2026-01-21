@@ -46,20 +46,16 @@ done
 
 ### Prompt for operator version
 echo "Select a version of the MEKO/MCK operator"
-operator_options=("1.26.0" "1.25.0" "1.24.0" "custom" "Quit")
+operator_options=("1.4.0" "1.26.0" "custom" "Quit")
 select opt in "${operator_options[@]}"
 do
   case $opt in
+      1.4.0)
+      export MEKO_version=1.4.0
+      break
+      ;;
       1.26.0)
       export MEKO_version=1.26.0
-      break
-      ;;
-      1.25.0)
-      export MEKO_version=1.25.0
-      break
-      ;;
-      1.24.0)
-      export MEKO_version=1.24.0
       break
       ;;
       custom)
@@ -104,16 +100,16 @@ fi
 # --- Version check logic ---
 
 echo "Which version of Ops Manager would you like to install"
-opsman_options=("7.0.8" "6.0.24" "custom" "Quit")
+opsman_options=("8.0.14" "7.0.8" "custom" "Quit")
 select opt in "${opsman_options[@]}"
 do
   case $opt in
-      7.0.8)
-      export OM_VERSION=7.0.8
+      8.0.14)
+      export OM_VERSION=8.0.14
       break
       ;;
-      6.0.24)
-      export OM_VERSION=6.0.24
+      7.0.8)
+      export OM_VERSION=7.0.8
       break
       ;;
       custom)
