@@ -271,7 +271,7 @@ EOF
 )
 
 kubectl exec --context "${K8S_CTX}" -n "${MDB_NS}" mongodb-tools-pod -- /bin/bash -eu -c "$(cat <<EOF
-echo '${mdb_script}' > /tmp/mdb_vector_script.js
+echo '${mdb_vector_script}' > /tmp/mdb_vector_script.js
 mongosh --quiet "${MDB_CONNECTION_STRING}" < /tmp/mdb_vector_script.js
 EOF
 )"

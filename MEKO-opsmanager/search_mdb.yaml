@@ -4,7 +4,7 @@ metadata:
   name: mdb-rs
 spec:
   members: 1
-  version: 8.0.10-ent
+  version: 8.2.3-ent
   type: ReplicaSet
   opsManager:
     configMapRef:
