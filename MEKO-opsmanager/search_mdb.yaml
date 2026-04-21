@@ -3,7 +3,7 @@ kind: MongoDB
 metadata:
   name: mdb-rs
 spec:
-  members: 1
+  members: 3
   version: 8.2.3-ent
   type: ReplicaSet
   opsManager:
