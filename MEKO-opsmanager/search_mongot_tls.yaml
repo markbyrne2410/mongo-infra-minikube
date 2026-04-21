@@ -1,0 +1,26 @@
+apiVersion: mongodb.com/v1
+kind: MongoDBSearch
+metadata:
+  name: mdb-rs
+spec:
+  logLevel: DEBUG
+#  spec.replicas-> only with HA 
+#   replicas: 2
+  # no need to specify source.mongodbResourceRef if MongoDBSearch CR has the same name as MongoDB CR
+  # the operator infer it automatically
+# uncomment below for TLS  
+#  security:
+#    tls:
+#      certificateKeySecretRef:
+#        name: mdb-mdb-rs-cert
+# uncomment above for TLS 
+# spec.loadBalancer-> only with HA
+#  loadBalancer:
+#    managed: {}
+  resourceRequirements:
+    limits:
+      cpu: "1"
+      memory: 2Gi
+    requests:
+      cpu: "1"
+      memory: 1Gi

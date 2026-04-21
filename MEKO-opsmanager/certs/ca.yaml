@@ -1,0 +1,35 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned
+  namespace: mongodb
+spec:
+  selfSigned: {}
+## Create our in-house CA certificate and key using our self-signed Issuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-ca
+  namespace: mongodb
+spec:
+  isCA: true
+  duration: 43800h # 5 years
+  commonName: my-ca
+  secretName: my-ca-secret
+
+  issuerRef:
+    name: selfsigned
+    kind: Issuer
+    group: cert-manager.io
+## Create an issuer from our in-house CA secret
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: my-ca
+  namespace: mongodb
+spec:
+  ca:
+    secretName: my-ca-secret

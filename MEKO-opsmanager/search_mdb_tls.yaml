@@ -1,0 +1,64 @@
+apiVersion: mongodb.com/v1
+kind: MongoDB
+metadata:
+  name: mdb-rs
+spec:
+  members: 3
+  version: 8.2.6-ent
+  type: ReplicaSet
+  opsManager:
+    configMapRef:
+      name: my-project-search-vector
+  credentials: credentials-project-search-vector
+#  connectivity:
+#    replicaSetHorizons:
+#      - "nodeport": "mdb-rs-0.localhost:32017"
+#      - "nodeport": "mdb-rs-1.localhost:32018"
+#      - "nodeport": "mdb-rs-2.localhost:32019"
+  connectivity:
+    replicaSetHorizons:
+      - "nodeport": "mdb-rs-0.localhost:32017"
+      - "nodeport": "mdb-rs-1.localhost:32018"
+      - "nodeport": "mdb-rs-2.localhost:32019"   
+  security:
+    authentication:
+      enabled: true
+      ignoreUnknownUsers: true
+      modes:
+      - SCRAM
+#comment below and uncomment above to test with tls disabled
+#      requireClientTLSAuthentication: false
+#    certsSecretPrefix: "mdb"
+#    tls:
+#      ca: "my-ca"
+#  additionalMongodConfig:
+#    net:
+#      ssl:
+#        mode: "allowSSL"
+# comment above and uncomment below to test with ssl disabled
+      requireClientTLSAuthentication: false
+    certsSecretPrefix: "mdb"
+    tls:
+      ca: "my-ca"
+  additionalMongodConfig:
+    net:
+      ssl:
+        mode: "allowSSL"
+  agent:
+    logLevel: DEBUG
+  statefulSet:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mongodb-enterprise-database
+            resources:
+              limits:
+                cpu: "2"
+                memory: 3Gi
+              requests:
+                cpu: "1"
+                memory: 1Gi
+#           - name: busybox
+#             image: busybox
+#             command: ["sh", "-c", "sleep 3600"]

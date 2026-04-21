@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mdb-rs-0
+  namespace: mongodb
+spec:
+  type: NodePort
+  selector:
+    statefulset.kubernetes.io/pod-name: mdb-rs-0
+  ports:
+    - port: 27017
+      targetPort: 27017
+      nodePort: 32017
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mdb-rs-1
+  namespace: mongodb
+spec:
+  type: NodePort
+  selector:
+    statefulset.kubernetes.io/pod-name: mdb-rs-1
+  ports:
+    - port: 27017
+      targetPort: 27017
+      nodePort: 32018
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mdb-rs-2
+  namespace: mongodb
+spec:
+  type: NodePort
+  selector:
+    statefulset.kubernetes.io/pod-name: mdb-rs-2
+  ports:
+    - port: 27017
+      targetPort: 27017
+      nodePort: 32019

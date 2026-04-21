@@ -1,0 +1,86 @@
+## Create a Server/Client Certificate from our in-house CA
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mdb-rs-cert
+  namespace: mongodb
+spec:
+  ## secretName is alwayse required
+  secretName: mdb-mdb-rs-cert
+  subject:
+    organizationalUnits:
+     - Cluster
+    organizations:
+     - Internal
+  # The use of the common name field has been deprecated since 2000 and is
+  # discouraged from being used.
+  # commonName: mongodb.svc.cluster.local
+  duration: 3000h #
+  renewBefore: 1h # 15d
+  usages:
+    - server auth
+    - client auth
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    size: 2048
+
+  dnsNames:
+    - mdb-rs-0.localhost
+    - mdb-rs-1.localhost
+    - mdb-rs-2.localhost
+    - mdb-rs-0.mdb-rs-svc.mongodb.svc.cluster.local
+    - mdb-rs-0
+    - mdb-rs-1.mdb-rs-svc.mongodb.svc.cluster.local
+    - mdb-rs-1
+    - mdb-rs-2.mdb-rs-svc.mongodb.svc.cluster.local
+    - mdb-rs-2
+    - k3s-cluster-cp-east-1.localhost
+
+  issuerRef:
+    name: my-ca
+    kind: Issuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mdb-rs-clusterfile
+  namespace: mongodb
+spec:
+  ## secretName is alwayse required
+  secretName: mdb-mdb-rs-clusterfile
+  subject:
+    organizationalUnits:
+     - Cluster
+    organizations:
+     - Internal
+  # The use of the common name field has been deprecated since 2000 and is
+  # discouraged from being used.
+  # commonName: mongodb.svc.cluster.local
+  duration: 2h # 90d
+  renewBefore: 1h # 15d
+  usages:
+    - server auth
+    - client auth
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    size: 2048
+
+  dnsNames:
+    - mdb-rs-0.localhost
+    - mdb-rs-1.localhost
+    - mdb-rs-2.localhost
+    - mdb-rs-0.mdb-rs-svc.mongodb.svc.cluster.local
+    - mdb-rs-0
+    - mdb-rs-1.mdb-rs-svc.mongodb.svc.cluster.local
+    - mdb-rs-1
+    - mdb-rs-2.mdb-rs-svc.mongodb.svc.cluster.local
+    - mdb-rs-2
+
+  issuerRef:
+    name: my-ca
+    kind: Issuer
+    group: cert-manager.io

@@ -1,0 +1,28 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mdb-mdb-rs-agent-certs
+  namespace: mongodb
+spec:
+  ## secretName is alwayse required
+  secretName: mdb-mdb-rs-agent-certs
+  commonName: mongodb-agent
+  subject:
+    organizationalUnits:
+      - MongoDB Agents
+  # The use of the common name field has been deprecated since 2000 and is
+  # discouraged from being used.
+  # commonName: mongodb.svc.cluster.local
+  duration: 2h # 90d
+  renewBefore: 1h # 15d
+  usages:
+    - client auth
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  issuerRef:
+    name: my-ca
+    kind: Issuer
+    group: cert-manager.io
