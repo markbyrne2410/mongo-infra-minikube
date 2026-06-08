@@ -43,7 +43,7 @@ spec:
   additionalMongodConfig:
     net:
       ssl:
-        mode: "allowSSL"
+        mode: "requireSSL"
   agent:
     logLevel: DEBUG
   statefulSet:

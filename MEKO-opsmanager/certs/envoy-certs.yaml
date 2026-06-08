@@ -1,0 +1,40 @@
+## Create the Envoy server certificate 
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mdb-rs-search-lb-0-cert
+spec:
+  secretName: mdb-rs-search-lb-0-cert
+  duration: 8760h    # 1 year
+  renewBefore: 720h  # 30 days
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  usages:
+    - server auth
+  dnsNames:
+    - "*.mongodb.svc.cluster.local"
+  issuerRef:
+    name: my-ca
+    kind: Issuer
+
+---
+## Create the Envoy client certificate 
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mdb-rs-search-lb-0-client-cert
+spec:
+  secretName: mdb-rs-search-lb-0-client-cert
+  duration: 8760h    # 1 year
+  renewBefore: 720h  # 30 days
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  usages:
+    - client auth
+  dnsNames:
+    - "*.mongodb.svc.cluster.local"
+  issuerRef:
+    name: my-ca
+    kind: Issuer
