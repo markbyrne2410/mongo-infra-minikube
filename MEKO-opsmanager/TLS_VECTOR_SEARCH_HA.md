@@ -1,4 +1,4 @@
-# Kubernetes TLS Setup for MongoDB Replica Set
+# Kubernetes TLS Setup for MongoDB Replica Set and Mongot with Envoy LB
 
 ## Prerequisites
 - mdb-rs ReplicaSet and Search are already up and running which was performed using via the extras.sh script
@@ -63,7 +63,17 @@ kubectl apply -f search_mdb_tls.yaml
 
 ---
 
-### 8. Apply TLS config for mongot
+### 8. Apply mongot and envoy certificates
+```bash
+kubectl apply -f mongot-cert.yaml
+kubectl apply -f envoy-certs.yaml
+```
+- File location:  `certs/mongot-cert.yaml.yaml` & `certs/envoy-certs.yaml`
+
+---
+
+
+### 9. Apply TLS config for mongot
 ```bash
 kubectl apply -f search_mongot_tls_ha.yaml
 ```
@@ -71,14 +81,14 @@ kubectl apply -f search_mongot_tls_ha.yaml
 
 ---
 
-### 9. Deply the external service
+### 10. Deply the external service
 ```bash
 kubectl apply -f external-svc.yaml
 ```
 - File location: `MEKO-OPSMANAGER/external-svc.yaml`
 
 ---
-### 10. Set up port forwarding (auto-restart on failure)
+### 11. Set up port forwarding (auto-restart on failure)
 
 ```bash
 while true; do

@@ -63,22 +63,14 @@ kubectl apply -f search_mdb_tls.yaml
 
 ---
 
-### 8. Apply TLS config for mongot
-```bash
-kubectl apply -f search_mongot_tls.yaml
-```
-- File location: `MEKO-OPSMANAGER/search_mongot_tls.yaml`
-
----
-
-### 9. Deply the external service
+### 8. Deply the external service
 ```bash
 kubectl apply -f external-svc.yaml
 ```
 - File location: `MEKO-OPSMANAGER/external-svc.yaml`
 
 ---
-### 10. Set up port forwarding (auto-restart on failure)
+### 9. Set up port forwarding (auto-restart on failure)
 
 ```bash
 while true; do
@@ -104,7 +96,7 @@ wait
 
 ---
 
-### 11. Update `/etc/hosts`
+### 10. Update `/etc/hosts`
 
 Add the following entries to your local machine:
 

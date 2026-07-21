@@ -4,7 +4,7 @@ metadata:
   name: mdb-rs
 spec:
   members: 3
-  version: 8.2.3-ent
+  version: 8.3.4-ent
   type: ReplicaSet
   opsManager:
     configMapRef:
@@ -17,7 +17,7 @@ spec:
       modes:
       - SCRAM
   agent:
-    logLevel: DEBUG
+    logLevel: INFO
   statefulSet:
     spec:
       template:

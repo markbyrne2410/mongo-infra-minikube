@@ -3,12 +3,30 @@ kind: MongoDBSearch
 metadata:
   name: mdb-rs
 spec:
-  # no need to specify source.mongodbResourceRef if MongoDBSearch CR has the same name as MongoDB CR
-  # the operator infer it automatically
-  resourceRequirements:
-    limits:
-      cpu: "1"
-      memory: 2Gi
-    requests:
-      cpu: "1"
-      memory: 1Gi
+  source:
+    mongodbResourceRef:
+      name: mdb-rs
+  clusters:
+    - resourceRequirements:
+        requests:
+          cpu: "1"
+          memory: 2Gi
+        limits:
+          cpu: "1"
+          memory: 2Gi
+#  Uncomment the following lines and apply to enable auto embedding. You will need to create a secret with your embedding model API key and provide the endpoint for the embedding model.
+#  autoEmbedding:
+#    embeddingModelAPIKeySecret:
+#      name: voyage-api-keys
+#    providerEndpoint: https://ai.mongodb.com/v1/embeddings
+  version: "1.70.1"  
+  observability:
+    metricsForwarder:
+      mode: auto
+      resourceRequirements:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 250m
+          memory: 256Mi
