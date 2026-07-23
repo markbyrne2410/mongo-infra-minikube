@@ -19,6 +19,7 @@ spec:
 #    embeddingModelAPIKeySecret:
 #      name: voyage-api-keys
 #    providerEndpoint: https://ai.mongodb.com/v1/embeddings  
+  version: "1.70.1"
   observability:
     metricsForwarder:
       mode: auto
