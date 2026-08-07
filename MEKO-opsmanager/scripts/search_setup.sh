@@ -276,4 +276,6 @@ mongosh --quiet "${MDB_CONNECTION_STRING}" < /tmp/mdb_vector_script.js
 EOF
 )"
 
-fi 
+fi
+
+./scripts/prometheus_grafana_setup.sh

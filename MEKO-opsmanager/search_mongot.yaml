@@ -15,10 +15,10 @@ spec:
           cpu: "1"
           memory: 2Gi
 #  Uncomment the following lines and apply to enable auto embedding. You will need to create a secret with your embedding model API key and provide the endpoint for the embedding model.
-#  autoEmbedding:
-#    embeddingModelAPIKeySecret:
-#      name: voyage-api-keys
-#    providerEndpoint: https://ai.mongodb.com/v1/embeddings  
+#   autoEmbedding:
+#     embeddingModelAPIKeySecret:
+#       name: voyage-api-keys
+#     providerEndpoint: https://ai.mongodb.com/v1/embeddings  
   version: "1.70.1"
   observability:
     metricsForwarder:
